@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function deleteForm(idx) {
+		if (confirm(idx + '계정을 삭제하시겠습니까?')) {
+			let password = prompt('삭제할 계정의 비번을 입력하세요');
+			location.href = 'deleteOk?idx=' + idx + "&password=" + password;
+		}
+	}
+
+	function updateForm(idx) {
+		if (confirm(idx + '계정을 수정하시겠습니까?')) {
+			let password = prompt('수정할 계정의 비번을 입력하세요');
+			location.href = 'update?idx=' + idx + "&password=" + password;
+		}
+	}
+	
+	function viewForm(idx) {
+		//alert(idx+"내용보기")
+		window.open("view?idx="+idx,"보기창");
+	}
+	
+</script>
+</head>
+<body>
+
+	<header th:replace="~{comm/myLayout :: #myHeader}"></header>
+	<nav th:replace="~{comm/myLayout :: #myNav}"></nav>
+
+	<section style="border: 1px solid black; margin-top: 10px;">
+		<table>
+			<tr>
+				<td colspan="5"
+					style="border: none; font-size: 18pt; text-align: center;">
+					회원목록보기</td>
+			</tr>
+
+			<tr>
+				<td colspan="5"
+					style="border: none; font-size: 11pt; text-align: right;">전체
+					회원수 : [[${list.size}]]명</td>
+			</tr>
+
+			<tr>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>전화번호</th>
+				<th>포인트</th>
+				<th>주소</th>
+				<th>수정/삭제</th>
+			</tr>
+			<tr th:each="vo:${list}">
+				<td><a th:href="'javascript:viewForm(\'' + ${vo.idx} + '\')'">[[${vo.userid}]]</a></td>
+				<td>[[${vo.name}]]</td>
+				<td>[[${vo.phone}]]</td>
+				<td>[[${vo.point}]]</td>
+				<td>[[${vo.addr2}]] [[${vo.addr3}]] [[${vo.addr4}]]</td>
+				<td><a th:href="'javascript:updateForm(\'' + ${vo.idx} + '\')'">수정</a>
+					/ <a th:href="'javascript:deleteForm(\'' + ${vo.idx} + '\')'">삭제</a>
+				</td>
+			</tr>
+		</table>
+
+
+
+	</section>
+
+	<footer th:replace="~{comm/myLayout :: #myFooter}"></footer>
+
+
+
+</body>
+</html>
