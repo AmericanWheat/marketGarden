@@ -7,4 +7,5 @@
 	<select id="selectToday" resultType="string">
 		select sysdate from dual
 	</select>
+	
 </mapper>  

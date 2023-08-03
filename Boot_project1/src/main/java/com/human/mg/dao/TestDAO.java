@@ -6,5 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface TestDAO {
 
 	String selectToday();
-		
+		  
 }

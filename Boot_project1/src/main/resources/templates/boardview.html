@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	/*  아이디를 입력할때 Ajax로 가입가능한 id인지를 확인한다 */
+		$("#name").keyup(function(){
+		let name = $(this).val();
+		if(userid.indexOf(' ')>=0) {
+			alert('이름에는 공백을 포함할수 없어요');
+			$(this).val("");
+			$(this).focus();
+			return;
+		}
+	});
+	
+});	
+
+function formCheck(){
+	
+	value = $("#password").val();
+	if(value==null || value.trim().length==0){
+		alert('사용자 비밀번호는 반드시 입력해야 합니다.');
+		 $("#password").val("");
+		 $("#password").focus();
+		 return false;
+	}
+	let value = $("#name").val();
+	if(value==null || value.trim().length==0){
+		alert('사용자 이름은 반드시 입력해야 합니다.');
+		 $("#name").val("");
+		 $("#name").focus();
+		 return false;
+	}
+
+}
+</script>
+</head>
+<body>
+
+	<header th:replace="~{comm/myLayout :: #myHeader}"></header>
+	<nav th:replace="~{comm/myLayout :: #myNav}"></nav>
+	
+	<section style="border: 1px solid black; margin-top: 10px;" >
+	<table>
+		<tr>
+			<td class="title" colspan="4">
+			커뮤니티 - 내용보기
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right; border: none; font-weight: bold;">
+				이름
+			</td>
+			<td style="text-align: left;border: none;">
+				[[${vo.name}]]
+			</td>
+			<td style="text-align: right; border: none; font-weight: bold;">
+				조회수
+			</td>
+			<td  style="text-align: left;border: none;">
+				 [[${vo.readCount}]]회
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right; border: none; font-weight: bold;">
+				작성일
+			</td>
+			<td style="text-align: left;border: none;">
+				[[${#dates.format(vo.regDate,'yyyy년 MM월 dd일(EEEE) hh시 mm분 ss초')}]]
+			</td>
+			<td style="text-align: right; border: none; font-weight: bold;">
+				IP
+			</td>
+			<td  style="text-align: left;border: none;">
+				 [[${vo.ip}]]
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right; border: none; font-weight: bold;">
+				제목
+			</td>
+			<td style="text-align: left;border: none;" colspan="3">
+				[[${vo.subject}]]
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right; border: none; font-weight: bold; vertical-align: top;">
+				내용
+			</td>
+			<td style="text-align: left;border: none;" colspan="3">
+				<!-- 줄바꿈하여 내용을 출력한다. -->
+				[(${#strings.replace(vo.content,newLine,br)})]
+			</td>
+		</tr>
+		<tr>
+			<td  colspan="4" style="text-align: right; border: none; font-weight: bold; vertical-align: top;margin-right: 40px">
+				<input type="button" value="돌아가기"  class="btn btn-sm btn-outline-danger" 
+				th:onclick="|location.href='@{list(p=${cv.p},s=${cv.s},b=${cv.b})}'|"/>
+				<input type="button" value="수정하기"  class="btn btn-sm btn-outline-danger" 
+				th:onclick="|location.href='@{update(idx=${cv.idx},p=${cv.p},s=${cv.s},b=${cv.b})}'|"/>
+				<input type="button" value="삭제하기"  class="btn btn-sm btn-outline-danger" 
+				th:onclick="|location.href='@{delete(idx=${cv.idx},p=${cv.p},s=${cv.s},b=${cv.b})}'|"/>
+			</td>
+		</tr>
+	</table> 
+	</section>
+	
+	<footer th:replace="~{comm/myLayout :: #myFooter}"></footer>
+
+</body>
+</html>

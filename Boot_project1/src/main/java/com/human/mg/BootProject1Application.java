@@ -19,7 +19,7 @@ public class BootProject1Application {
 	
 	@Autowired
 	DataSource dataSource;
-	
+
 	@Autowired
 	TestDAO dao;
 	

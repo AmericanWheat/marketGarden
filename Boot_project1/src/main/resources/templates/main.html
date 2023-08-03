@@ -5,6 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+function updateForm(idx) {
+	if (confirm(idx + ' 계정을 수정하시겠습니까?')) {
+		let password = prompt('수정할 계정의 비번을 입력하세요');
+		location.href = 'update?idx=' + idx + "&password=" + password;
+	}
+}
+</script>
 </head>
 <body>
 
@@ -15,26 +23,28 @@
 	<h2>임시 경로지정 페이지</h2>
 
 	<a href="/join"><button type="button">가입</button></a>
-    <a href="/update"><button type="button">수정</button></a>
+	<th:block th:if="${session.MgVO != NULL}">
+    <a th:href="'javascript:updateForm(\'' + ${session.MgVO.idx} + '\')'"><button type="button">수정</button></a>
+ 	</th:block>
     <a href="/board"><button type="button">게시판</button></a>
-	
+	<th:block th:if="${session.MgVO != NULL}">
 	<div sec:authorize="isAuthenticated()">
 		<fieldset>
 			<legend>시큐리티 정보</legend>
 			  	인증이 되었을때 이 내용이 보임 <br />
 			  	<a href="/logout">Logout</a>
 				<div>
-					로그인 사용자 : <span sec:authentication="name">Bob</span> <br />
+					로그인 사용자 : <span sec:authentication="name">[[${session.MgVO.userid}]]</span> <br />
 					로그인 권  &nbsp;&nbsp;한 :  
 					<span sec:authentication="principal.authorities">[admin,rookie]</span>
 				</div>
 				<div sec:authentication="principal">
 					로그인 정보가 보임
 				</div>
-			<div sec:authorize="hasRole('admin')">
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
 			  	admin 권한이  있을 경우만 이 내용이 보임
 			</div>
-			<div sec:authorize="hasRole('rookie')">
+			<div sec:authorize="hasRole('ROLE_ROOKIE')">
 			  	rookie 권한이  있을 경우만 이 내용이 보임
 			</div>
 			<th:block th:if="${session.MgVO != NULL}">
@@ -43,7 +53,7 @@
 			</th:block>
 		</fieldset>
 	</div>
-	
+		</th:block>
 	
 	
 	</section>

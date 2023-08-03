@@ -27,11 +27,7 @@ public Collection<? extends GrantedAuthority> getAuthorities() {}
 @NoArgsConstructor
 @Data
 public class MgVO implements UserDetails {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 	private int idx;
 	private String userid;
 	private String password;
@@ -54,8 +50,10 @@ public class MgVO implements UserDetails {
 	    String[] roles = lev.split(",");
 
 	    for (String role : roles) {
-	        // 'role' 변수에 역할 정보가 저장되어 있다고 가정하고, "ROLE_" 접두사를 붙여서 authorities에 추가합니다.
-	        authorities.add(new SimpleGrantedAuthority("ROLE_" + role.trim()));
+	    	if ("ROLE_ADMIN".equals(role.trim())) {
+	            authorities.add(new SimpleGrantedAuthority(role.trim()));
+	            break;
+	        }
 	    }
 
 	    return authorities;

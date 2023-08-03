@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.human.mg.service.MgService;
 import com.human.mg.vo.MgVO;
@@ -24,13 +25,15 @@ public class MgController {
 
 	// 메인 컨트롤러
 	@GetMapping(value={"/","/main"})
-	public String main(Principal principal, Model model) {
+	public String main(@RequestParam(name = "idx", required = false) String idx, Principal principal, Model model) {
 
 		if (principal != null) {
 			model.addAttribute("userName", principal.getName());
 			model.addAttribute("auth", principal);
 		}
 
+		model.addAttribute("idx", idx);
+		
 		return "main";
 	}
 
@@ -84,14 +87,13 @@ public class MgController {
 	}
 
 	// 회원 삭제
-
 	@GetMapping("/deleteOk")
 	public String deleteGet(@ModelAttribute MgVO mgVO) {
 		mgService.delete(mgVO);
 		return "redirect:/list";
 	}
 
-	// 회원 리스트(차후 스프링 시큐리티로 관리자만 접근가능하게 할거임)
+	// 회원 리스트(관리자만 접근가능)
 	// 카피라이트 문장에 링크 넣어둠
 	@GetMapping("/list")
 	public String list(Model model) {
@@ -113,5 +115,18 @@ public class MgController {
 		}
 		return "login";
 	}
-
+	
+	// 회원보기
+	@GetMapping("/view")
+	public String view(@RequestParam(required = true, defaultValue = "0") int idx, Model model) {
+		model.addAttribute("vo", mgService.selectByIdx(idx)); // 글의 정보를 가지고 수정폼으로간다
+		return "view";
+	}
+	
+	//아이디 중복확인
+	@GetMapping("/idCheck")
+	@ResponseBody
+	public int idCheck(@RequestParam(required = true, defaultValue = "") String userid) { 
+		return mgService.selectByIdxCount(userid);
+	}
 }

@@ -4,7 +4,106 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	/*  아이디를 입력할때 Ajax로 가입가능한 id인지를 확인한다 */
+		$("#userid").keyup(function(){
+		let userid = $(this).val();
+		if(userid.indexOf(' ')>=0) {
+			alert('아이디에는 공백을 포함할수 없어요');
+			$(this).val("");
+			$(this).focus();
+			return;
+		}
+				
+		// 여기서 Ajax를 호출해서 중복여부 검사!!!
+		if(userid.length>=4){ // 길이가 4자 이상일경우에만 Ajax처리를 한다.
+			axios.get('/idCheck?userid='+userid)
+			  .then(function (response) {
+			    // 성공 핸들링
+			    console.log(response);
+			    let result = response.data * 1; // 혹시라도 문자열이지 몰라서 숫자로 변경
+			    if(result>=1){ // 동일한 아이디가 존재한다 
+			    	$("#msg").html("사용 불가능한 아이디 입니다.").css('color','red');
+			    }else{ // 0이면 동일한 아이디가 없다.
+			    	$("#msg").html("사용 가능한 아이디 입니다.").css('color','green');
+			    }
+			  })
+			  .catch(function (error) {
+			    // 에러 핸들링
+			    console.log(error);
+			    alert('실패!!!!')
+			  })
+			  .finally(function () {
+			    // 항상 실행되는 영역
+			  });	
+			
+			
+		}else{
+			$("#msg").html("");
+		}
+		
+		
+	});
+	
+});	
 
+function formCheck(){
+	let value = $("#userid").val();
+	if(value==null || value.trim().length==0){
+		alert('사용자 아이디는 반드시 입력해야 합니다.');
+		 $("#userid").val("");
+		 $("#userid").focus();
+		 return false;
+	}
+	value = $("#password").val();
+	if(value==null || value.trim().length==0){
+		alert('사용자 비밀번호는 반드시 입력해야 합니다.');
+		 $("#password").val("");
+		 $("#password").focus();
+		 return false;
+	}
+	value = $("#name").val();
+	if(value==null || value.trim().length==0){
+		alert('사용자 이름은 반드시 입력해야 합니다.');
+		 $("#name").val("");
+		 $("#name").focus();
+		 return false;
+	}
+	value = $("#phone").val();
+	if(value==null || value.trim().length==0){
+		alert('전화번호는 반드시 입력해야 합니다.');
+		 $("#phone").val("");
+		 $("#phone").focus();
+		 return false;
+	}
+	
+	value = $("#addr1").val();
+	if(value==null || value.trim().length==0){
+		alert('주소는 반드시 입력해야 합니다.');
+		 $("#addr3").val("");
+		 $("#addr3").focus();
+		 return false;
+	}
+	
+	// 아이디 체크한 결과의 색상을 얻어보자!!!
+	value = $("#msg").css('color');
+	//alert(value=='rgb(255, 0, 0)');
+	if(value=='rgb(255, 0, 0)'){
+		alert('사용자 아이디는 반드시 등록가능한 아이디여야 합니다.');
+		 $("#userid").val("");
+		 $("#userid").focus();
+		 return false;
+	}
+}
+</script>
 </head>
 <body>
 
@@ -13,8 +112,8 @@
 	
 	<section style="border: 1px solid black; margin-top: 10px;" >
 			<h2>회원가입</h2>
-	<form action="insertOk" method="post">
-			<input type="text" id="userid" name="userid" placeholder="id입력"/>
+	<form action="insertOk" method="post" onsubmit="return formCheck();">
+			<input type="text" id="userid" name="userid" placeholder="id입력"/><span id="msg"></span><br id="skip" style="display: none;"/>
 <br />		<input type="password" id="password" name="password" placeholder="pw입력"/>
 <br />		<input type="text" id="name" name="name" placeholder="이름 입력"/>
 <br />		<input type="text" id="phone" name="phone" placeholder="폰 입력"/>
@@ -32,7 +131,6 @@
 	</section>
 	
 	<footer th:replace="~{comm/myLayout :: #myFooter}"></footer>
-
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({

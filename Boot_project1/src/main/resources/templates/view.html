@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<header th:replace="~{comm/myLayout :: #myHeader}"></header>
+	<nav th:replace="~{comm/myLayout :: #myNav}"></nav>
+	
+	<section style="border: 1px solid black; margin-top: 10px;" >
+		<table>
+			<tr>
+				<td style="border: none; font-size: 18pt; text-align: center;">
+					회원 정보</td>
+			</tr>
+
+			<tr>
+				<td>
+				
+					사용자 아이디 : [[${vo.userid}]] <br />
+					사용자 이름 : [[${vo.username}]]  <br />
+					사용자 전화번호 : [[${vo.phone}]]<br />
+					사용자 주소 : [[${vo.addr2}]] [[${vo.addr3}]] [[${vo.addr4}]] <br />
+					사용자 가입일 : [[${#dates.format(vo.regDate, 'yyyy년 MM월 dd일 hh시 mm분 ss초')}]] <br />
+					사용자 포인트 : [[${vo.point}]] <br />
+					사용자 등    급 : [[${vo.lev}]] <br />
+					
+
+					<input type="button" value="창닫기" onclick="self.close()"/>
+									
+									
+					
+				</td>
+			</tr>
+
+
+		</table>
+	</section>
+	
+	
+	<footer th:replace="~{comm/myLayout :: #myFooter}"></footer>
+
+	
+	
+</body>
+</html>

@@ -24,7 +24,7 @@ public class MgServiceImpl implements MgService {
 	public void insert(MgVO mgVO) {
 		try {
 			if (mgVO != null) {
-				mgVO.setLev("rookie");
+				mgVO.setLev("ROLE_rookie");
 				mgVO.setPoint(1000);
 				BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 				mgVO.setPassword(bCryptPasswordEncoder.encode(mgVO.getPassword()));
@@ -33,6 +33,7 @@ public class MgServiceImpl implements MgService {
 			}
 		} catch (Exception e) {
 			log.info("{} 저장실패", mgVO);
+			e.printStackTrace();
 		}
 	}
 

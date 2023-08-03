@@ -21,8 +21,9 @@ CREATE TABLE maketgarden(
 		addr1 varchar2(100) NOT NULL,
 		addr2 varchar2(100) NOT NULL,
 		addr3 varchar2(100),
+		addr4 varchar2(100),
 		lev varchar2(100) DEFAULT 'rookie'
-)
+);
 
 SELECT * FROM maketgarden;
 
@@ -32,3 +33,19 @@ INSERT INTO MAKETGARDEN m values(
 
 SELECT * FROM maketgarden;
 
+-- 유동게시판 시퀀스
+DROP SEQUENCE mgb_seq_idx;
+CREATE SEQUENCE mgb_seq_idx;
+
+
+-- 유동 게시판(로그인 없이 사용함)
+CREATE TABLE mgboard(
+	idx NUMBER PRIMARY KEY,
+	name varchar2(200) NOT NULL,
+	password varchar2(200) NOT NULL,
+	subject varchar2(200) NOT NULL,
+	content varchar2(2000) NOT NULL,
+	regdate timestamp DEFAULT sysdate,
+	readcount NUMBER default 0,
+	ip varchar2(200) NOT NULL
+);

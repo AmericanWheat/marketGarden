@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.thymeleaf.org">
+<html lang="ko" xmlns="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 	<!-- header  -->
 	<header id="myHeader" style="border: 1px solid black; margin: auto;">
-		<img alt="로고" src="img/market garden.png" id="img" width="200">
+		<img alt="로고" src="/img/market garden.png" id="img" width="200">
 		<span style="font-size: 50px;">Market Garden</span>
+		<th:block th:if="${session.MgVO == NULL}">
 		<button type="button" onclick="location.href='/login'"
 			style="position: inherit; right: 20px;">로그인</button>
 		<button type="button" onclick="location.href='/join'">회원가입</button>
 		<button id="live-chat"
 			style="position: fixed; bottom: 20px; right: 20px; border: none; border-radius: 16px; background: royalblue; color: white; padding: 12px; font-weight: bold; box-shadow: 0px 5px 15px gray; cursor: pointer;">실시간
 			채팅 💬</button>
+		</th:block>
+		<th:block th:if="${session.MgVO != NULL}">
+		</th:block>
 	</header>
 
 	<!-- nav  -->
@@ -22,12 +28,12 @@
 		style="border: 1px solid black; height: 50px; margin-top: 10px; border-radius: 20px;">
 		<table style="width: 100%;">
 			<tr>
-				<th width="15%"><a href="main">메인</a></th>
+				<th width="15%"><a href="/main">메인</a></th>
 				<th width="15%"><a href="#">중고거래</a></th>
 				<th width="15%"><a href="#">알바찾기</a></th>
 				<th width="15%"><a href="#">우리동네핫딜</a></th>
 				<th width="15%"><a href="#">우리동네맛집</a></th>
-				<th width="15%"><a href="#">커뮤니티</a></th>
+				<th width="15%"><a href="/board/list">커뮤니티</a></th>
 			</tr>
 		</table>
 	</nav>
