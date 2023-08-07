@@ -70,10 +70,9 @@ div{
 	text-align: center;
 }
 
-.login_button {
+.login_button1 {
 	width: 50%;
-	height: 25%;
-	font-size: 40px;
+	font-size: 20px;
 	font-weight: 900;
 	color: white;
 	margin-bottom:40px;
