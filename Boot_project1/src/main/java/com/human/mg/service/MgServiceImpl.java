@@ -40,20 +40,25 @@ public class MgServiceImpl implements MgService {
 	/** 회원정보수정 */
 	@Override
 	public void update(MgVO mgVO) {
-		try {
-			if (mgVO != null) {
-				MgVO dbVO = dao.selectByIdx(mgVO.getIdx());
-
-				if (dbVO != null && dbVO.getPassword().equals(mgVO.getPassword())) {
-					dao.update(mgVO);
-				}
-				log.info("{} 업데이트 성공", mgVO);
-			}
-
-		} catch (Exception e) {
-			log.info("{} 업데이트 실패", mgVO);
-			e.printStackTrace();
-		}
+	    try {
+	        if (mgVO != null) {
+	            MgVO dbVO = dao.selectByIdx(mgVO.getIdx());
+	            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+	            
+	            // 입력된 비밀번호와 DB에 저장된 암호화된 비밀번호를 비교
+	            if (dbVO != null && bCryptPasswordEncoder.matches(mgVO.getPassword(), dbVO.getPassword())) {
+	                // 여기에서 비밀번호가 일치하면 업데이트 수행
+	                dao.update(mgVO);
+	            } else {
+	                log.info("비밀번호 일치하지않음 {}", mgVO.getPassword());
+	            }
+	            
+	            log.info("{} 업데이트 성공", mgVO);
+	        }
+	    } catch (Exception e) {
+	        log.info("{} 업데이트 실패", mgVO);
+	        e.printStackTrace();
+	    }
 	}
 
 	/** 회원정보삭제 */
@@ -62,7 +67,8 @@ public class MgServiceImpl implements MgService {
 		try {
 			if (mgVO != null) {
 				MgVO dbVO = dao.selectByIdx(mgVO.getIdx());
-				if (dbVO != null && dbVO.getPassword().equals(mgVO.getPassword())) {
+			    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+				if (dbVO != null && bCryptPasswordEncoder.matches(mgVO.getPassword(), dbVO.getPassword())) {
 					dao.delete(mgVO.getIdx());
 					log.info("삭제 성공");
 				}
@@ -119,19 +125,19 @@ public class MgServiceImpl implements MgService {
 	/** 비밀번호 체크 확인 */
 	@Override
 	public boolean passwordCheck(int idx, String password) {
-		boolean isCheck = false;
-		try {
-			// DB에 있는 자료와 비번이 같을때만 수정한다
-			MgVO dbVo = dao.selectByIdx(idx);
-			if (dbVo != null && dbVo.getPassword().equals(password)) {
-				isCheck = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return isCheck;
+	    try {
+	        // DB에 있는 자료와 비번이 같을때만 수정한다
+	        MgVO dbVo = dao.selectByIdx(idx);
+	        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+	        
+	        if (dbVo != null && bCryptPasswordEncoder.matches(password, dbVo.getPassword())) {
+	            return true;
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return false;
 	}
-
 	@Override
 	public MgVO selectByUserid(String userid) {
 		MgVO mgVO = dao.selectByUserid(userid);

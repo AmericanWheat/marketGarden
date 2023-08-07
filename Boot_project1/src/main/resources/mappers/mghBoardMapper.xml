@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.human.mg.dao.MghBoardDAO">
+	
+	<!-- 글쓰기  -->
+	<insert id="insert" parameterType="MghBoardVO">
+		insert into mghboard values(
+		mgh_seq_idx.nextval, #{name}, #{password}, #{subject}, #{content}, sysdate , 0 ,#{ip}, #{addr1}, #{addr2}
+		)
+	</insert>
+	
+	<!-- 글삭제  -->
+	<delete id="delete" parameterType="int">
+		delete from mghboard where idx=#{idx}
+	</delete>
+
+	<!-- 글수정  -->
+	<update id="update" parameterType="MghBoardVO">
+		update mghboard set subject = #{subject}, content = #{content}, regdate = sysdate, ip = #{ip} , addr1=#{addr1}, addr2=#{addr2}
+		where idx = #{idx}
+	</update>
+
+	<!-- 글 목록보기  -->
+	<select id="selectList" parameterType="hashmap" resultType="MghBoardVO">
+		select R.* from (
+			select rownum rnum, Q.* from (
+				select * from mghboard order by idx desc
+			) Q
+			where <![CDATA[rownum <= #{endNo}]]>
+		) R
+		where <![CDATA[rnum >= #{startNo}]]>
+	</select>
+	
+	<!-- 글 1개보기 -->
+	<select id="selectByIdx" resultType="MghBoardVO" parameterType="int">
+		select * from mghboard where idx=#{idx}	
+	</select>
+	
+	<!-- 글 개수 보기  -->
+	<select id="selectCount" resultType="int">
+		select count(*) from mghboard
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="incrementReadCount" parameterType="int">
+		update mghboard set readcount = readcount + 1 where idx = #{idx}
+	</update>
+	
+</mapper>  

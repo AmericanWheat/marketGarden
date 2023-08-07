@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+#table1 {
+	width: 1000px;
+	padding: 5px;
+	border: none;
+	margin: auto;
+	margin-top: 10px;
+}
+
+#td1 {
+	text-align: left;
+	border-top: 10px solid rgba(19, 87, 54, 0.7);
+	font-weight: bold;
+	font-size: 40px;
+}
+
+#td2 {
+	text-align: left;
+	font-weight: bold;
+}
+
+#tdc {
+	padding-top: 50px;
+	border-top: 10px solid rgba(19, 87, 54, 0.1);
+}
+
+#tdb {
+	text-align: center;
+	border-top: 10px solid rgba(19, 87, 54, 0.7);
+	font-weight: bold;
+	vertical-align: top;
+	margin-right: 40px;
+	padding-top: 15px;
+}
+
+#tdm {
+	text-align: left;
+	border-top: 10px solid rgba(19, 87, 54, 0.1);
+	padding-top: 15px;
+}

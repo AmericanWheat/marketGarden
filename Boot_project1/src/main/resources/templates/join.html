@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/join.css" />
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
@@ -110,22 +111,46 @@ function formCheck(){
 	<header th:replace="~{comm/myLayout :: #myHeader}"></header>
 	<nav th:replace="~{comm/myLayout :: #myNav}"></nav>
 	
-	<section style="border: 1px solid black; margin-top: 10px;" >
-			<h2>회원가입</h2>
+	<section style=" margin-top: 10px;" >
 	<form action="insertOk" method="post" onsubmit="return formCheck();">
-			<input type="text" id="userid" name="userid" placeholder="id입력"/><span id="msg"></span><br id="skip" style="display: none;"/>
-<br />		<input type="password" id="password" name="password" placeholder="pw입력"/>
-<br />		<input type="text" id="name" name="name" placeholder="이름 입력"/>
-<br />		<input type="text" id="phone" name="phone" placeholder="폰 입력"/>
-<br />
-
-<input type="text" id="addr1" name="addr1" placeholder="우편번호" readonly="readonly">
-<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" id="addr2" name="addr2" placeholder="주소" readonly="readonly"><br>
-<input type="text" id="addr3" name="addr3" placeholder="상세주소">
-<input type="text" id="addr4" name="addr4" placeholder="참고항목" readonly="readonly">
-
-		<button type="submit">완료</button>	
+		<div class="wrapper">
+			<div class="wrap">
+				<div class="subjecet">
+					<span>회원가입</span>
+				</div>
+			<div class="id_wrap">
+				<input class="input" type="text" id="userid" name="userid" placeholder="id입력"/>&nbsp<span id="msg"></span><br id="skip" style="display: none;"/>
+			</div>
+			<div class="pw_wrap">
+				<input class="input" type="password" id="password" name="password" placeholder="pw입력"/>
+			</div>
+			<div class="user_wrap">
+			<input class="input" type="text" id="name" name="name" placeholder="이름 입력"/>
+			</div>
+			<div class="user_wrap">
+			<input class="input" type="text" id="phone" name="phone" placeholder="폰 입력"/>
+			</div>
+			<div class="address_wrap"> 
+			<div class="address_input_1_wrap">
+				<input class="input" type="text" id="addr1" name="addr1" placeholder="우편번호" readonly="readonly">
+			</div>
+				<input type="button" onclick="sample6_execDaumPostcode()" class="address_button" value="우편번호 찾기">
+			<div class="address_input_2_wrap">	
+				<input class="input" type="text" id="addr2" name="addr2" placeholder="주소" readonly="readonly">
+			</div>
+			<div class="address_input_3_wrap">
+				<input class="input" type="text" id="addr3" name="addr3" placeholder="상세주소">
+			</div>
+			<div class="address_input_3_wrap">	
+				<input class="input" type="text" id="addr4" name="addr4" placeholder="참고항목" readonly="readonly">
+			</div>
+		</div>
+			<div class="join_button_wrap">
+				<button class="join_button" type="submit">완료</button>	
+			</div>
+		</div>
+	</div>
+		
 	</form>
 
 	</section>

@@ -8,32 +8,54 @@
 </head>
 <body>
 	<!-- header  -->
-	<header id="myHeader" style="border: 1px solid black; margin: auto;">
+	<header id="myHeader">
+	<script type="text/javascript">
+function updateForm(idx) {
+	if (confirm(idx + ' 계정을 수정하시겠습니까?')) {
+		let password = prompt('수정할 계정의 비번을 입력하세요');
+		location.href = '/update?idx=' + idx + "&password=" + password;
+	}
+}
+</script>
+		<table style=" width: 1000px; padding: 5px; border: none; margin: auto; margin-top: 10px;">
+		<tr>
+		<th style="padding:5px;  border: none; text-align: center;">
 		<img alt="로고" src="/img/market garden.png" id="img" width="200">
-		<span style="font-size: 50px;">Market Garden</span>
+		</th>
+		<th style="padding:5px;  border: none; text-align: center;">
+		<span style="font-size: 85px; color:#198754; ">Market Garden</span>
+		</th>
+		<th style="padding:5px;  border: none; text-align: center;">
 		<th:block th:if="${session.MgVO == NULL}">
 		<button type="button" onclick="location.href='/login'"
-			style="position: inherit; right: 20px;">로그인</button>
-		<button type="button" onclick="location.href='/join'">회원가입</button>
+			style="position: inherit; right: 20px;" class="btn btn-sm btn-outline-success" >로그인</button>
+		<button type="button" onclick="location.href='/join'" class="btn btn-sm btn-outline-success">회원가입</button>
 		<button id="live-chat"
 			style="position: fixed; bottom: 20px; right: 20px; border: none; border-radius: 16px; background: royalblue; color: white; padding: 12px; font-weight: bold; box-shadow: 0px 5px 15px gray; cursor: pointer;">실시간
 			채팅 💬</button>
 		</th:block>
 		<th:block th:if="${session.MgVO != NULL}">
+			<div th:text="${session.MgVO.name}+님"/><br />
+			<button type="button" onclick="location.href='/logout'"
+			style=" right: 20px;" class="btn btn-sm btn-outline-success">&nbsp&nbsp&nbsp로그아웃&nbsp&nbsp&nbsp</button>	
+			<br /><br />
+			<a th:href="'javascript:updateForm(\'' + ${session.MgVO.idx} + '\')'"><button type="button" class="btn btn-sm btn-outline-success">회원정보수정</button></a>
 		</th:block>
+		</th>
+		</tr>
+		</table>
 	</header>
 
 	<!-- nav  -->
-	<nav id="myNav"
-		style="border: 1px solid black; height: 50px; margin-top: 10px; border-radius: 20px;">
-		<table style="width: 100%;">
+	<nav id="myNav">
+		<table style="width: 1000px; padding: 5px; margin: auto; margin-top: 10px;">
 			<tr>
-				<th width="15%"><a href="/main">메인</a></th>
-				<th width="15%"><a href="#">중고거래</a></th>
-				<th width="15%"><a href="#">알바찾기</a></th>
-				<th width="15%"><a href="#">우리동네핫딜</a></th>
-				<th width="15%"><a href="#">우리동네맛집</a></th>
-				<th width="15%"><a href="/board/list">커뮤니티</a></th>
+				<th style="padding:5px; background-color: #198754; text-align: center;"><a href="/main" style="color: white; text-decoration: none;">메인</a></th>
+				<th style="padding:5px; background-color: #198754; text-align: center;"><a href="/uboard/list" style="color: white; text-decoration: none;">중고거래</a></th>
+				<th style="padding:5px; background-color: #198754; text-align: center;"><a href="/aboard/list" style="color: white; text-decoration: none;">알바찾기</a></th>
+				<th style="padding:5px; background-color: #198754; text-align: center;"><a href="/hboard/list" style="color: white; text-decoration: none;">우리동네핫딜</a></th>
+				<th style="padding:5px; background-color: #198754; text-align: center;"><a href="/mboard/list" style="color: white; text-decoration: none;">우리동네맛집</a></th>
+				<th style="padding:5px; background-color: #198754; text-align: center;"><a href="/board/list" style="color: white; text-decoration: none;">커뮤니티</a></th>
 			</tr>
 		</table>
 	</nav>
@@ -42,28 +64,27 @@
 		style="border: 1px solid black; height: 550px; margin-top: 10px; text-align: center;">
 	</main>
 
-	<footer id="myFooter"
-		style="border: 1px solid black; height: 100px; margin-top: 10px; text-align: center;">
-		<table style="width: 100%;">
+	<footer id="myFooter">
+			<table style=" width: 1000px; padding: 5px; border: none; margin: auto; margin-top: 10px;">
 			<tr>
-				<th width="10%"><a href="#">회사소개</a></th>
-				<th width="10%"><a href="#">인재채용</a></th>
-				<th width="10%"><a href="#">제휴제안</a></th>
-				<th width="10%"><a href="#">이용약관</a></th>
-				<th width="10%"><a href="#">개인정보처리방침</a></th>
-				<th width="10%"><a href="#">고객센터</a></th>
+				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="#" style="color: white; text-decoration: none;">회사소개</a></th>
+				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="#" style="color: white; text-decoration: none;">인재채용</a></th>
+				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="#" style="color: white; text-decoration: none;">제휴제안</a></th>
+				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="#" style="color: white; text-decoration: none;">이용약관</a></th>
+				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="#" style="color: white; text-decoration: none;">개인정보처리방침</a></th>
+				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="#" style="color: white; text-decoration: none;">고객센터</a></th>
 			</tr>
 			<tr>
-				<td colspan="6">Copyright <a href="list">©</a> www.marketgarden.gg All
+				<td colspan="6" style="padding:5px; border: 1px solid gray; text-align: center;">Copyright <a href="/list" style="text-decoration: none; color: black;">©</a> www.marketgarden.gg All
 					rights reserved.
 				</td>
 			</tr>
 			<tr>
-				<td colspan="6">대표 이민재 사업자번호 777-77-7777 직업정보제공사업 신고번호
+				<td colspan="6" style="padding:5px; border: 1px solid gray; text-align: center;">대표 이민재 사업자번호 777-77-7777 직업정보제공사업 신고번호
 					7777-경기성남-7777</td>
 			</tr>
 			<tr>
-				<td colspan="6">주소 경기도 성남시 판교역로 777길 77, 777호 전화 7777-7777 고객문의
+				<td colspan="6" style="padding:5px; border: 1px solid gray; text-align: center;">주소 경기도 성남시 판교역로 777길 77, 777호 전화 7777-7777 고객문의
 					cs@marketgarden.com</td>
 			</tr>
 

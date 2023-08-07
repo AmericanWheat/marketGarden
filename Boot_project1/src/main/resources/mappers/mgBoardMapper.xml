@@ -18,7 +18,7 @@
 
 	<!-- 글수정  -->
 	<update id="update" parameterType="MgBoardVO">
-		update mgboard set subject = #{subject}, content = #{content}, regdate = sysdate, ip = #{ip} 
+		update mgboard set subject = #{subject}, content = #{content}, regdate = sysdate, ip = #{ip}
 		where idx = #{idx}
 	</update>
 

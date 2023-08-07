@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+* {
+	margin: 5px;
+	padding: 0px;
+	text-align: cen
+}
+
+/* content 랩 */
+.wrap {
+	width: 25%;
+	height : 25%;
+	margin-right: 37%;
+	margin-left: 37%;
+	text-align : center;
+	border: none;
+	background-image: url("/img/223.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+
+}
+
+div{
+	text-align: center;
+}
+
+.img{
+		width: 80%;
+		height: 80%;
+}
+
+/* 로그인 area */
+.logo_wrap {
+	margin-bottom: 5px;
+}
+
+.login_wrap {
+	margin-top: 5px;
+	margin-bottom: 40px; /* Adjust this value as needed */
+}
+
+.id_wrap {
+	margin-top: 40px;
+	text-align: center;
+}
+
+.id_input {
+	width: 50%;
+	height: 100%;
+	border: 1px solid white;
+	font-size: 28px;
+	border-radius: 5px;
+}
+
+.pw_wrap {
+	margin-top: 40px;
+	text-align: center;
+}
+
+.pw_iput {
+	width: 50%;
+	height: 100%;
+	border: 1px solid white;
+	font-size: 28px;
+	border-radius: 5px;
+}
+
+.login_button_wrap {
+	margin-top: 40px;
+	text-align: center;
+}
+
+.login_button {
+	width: 50%;
+	height: 25%;
+	font-size: 40px;
+	font-weight: 900;
+	color: white;
+	margin-bottom:40px;
+}
+
+/* float 속성 해제 */
+.clearfix {
+	clear: both;
+}
+
+/* 로그인 실패시 경고글 */
+.login_warn{
+    margin-top: 30px;
+    text-align: center;
+    color : red;
+}
+
+/* 로그인 성공 영역 */
+.login_success_area{
+    height: 62%;
+    width: 80%;
+    border: 2px solid #7474ad;
+    border-radius: 15px;
+    margin: 5% auto;
+    padding-top: 5%;
+}
+.login_success_area>span{
+    display : block;
+    text-align: left;
+    margin-left: 10%;
+}
+ 
+ 
