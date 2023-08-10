@@ -17,7 +17,7 @@
 		td {padding:5px; border: 1px solid gray; text-align: center;}
 		.title { text-align: left; font-size: 18pt; padding: 5px;border: 1px solid gray;}
 		.sub_title { text-align: right; font-size: 10pt; padding: 5px;border: none;}
-		</style>
+	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
@@ -25,21 +25,20 @@
 			console.log("게시판 목록보기 ~~~~~~~~~~~~~")
 		});	
 	</script>
-
 </head>
 <body>
-	<header th:replace="~{comm/myLayout :: #myHeader}" class="1"></header>
+	<header th:replace="~{comm/myLayout :: #myHeader}"></header>
 	<nav th:replace="~{comm/myLayout :: #myNav}"></nav>
 	<section>
 	<table id="table1">
 		<tr style="background-color: rgba(19,87,54, 0.1);">
-			<td class="title" colspan="6" style="color: gray;">커뮤니티</td>
+			<td class="title" colspan="6" style="color: gray;">우리동네핫딜</td>
 		</tr>
 		<tr>
-			<td class="title" colspan="6" style="font-size: 15px;">의견을 공유하는 공간입니다.</td>
+			<td class="title" colspan="6" style="font-size: 15px;">동네 핫딜을 공유하는 공간입니다.</td>
 		</tr>
 		<tr>
-			<td class="sub_title" colspan="6">[[${pv.pageInfo}]]</td>
+			<td class="sub_title" colspan="6"></td>
 		</tr>
 		<tr>
 			<th class="th">No</th>
@@ -49,14 +48,13 @@
 			<th class="th">작성일</th>
 			<th class="th">IP</th>
 		</tr>
-		
 		<th:block th:if="${pv.totalCount>0}">
 			<tr th:each="vo:${pv.list}">
 				<td>[[${vo.idx}]]</td>
 				<td>[[${vo.name}]]</td>
 				<td style="text-align: left;margin-left: 10px;">
 				<!-- 타임리프 링크 걸기 : th:href=@{주소(변수=값,....)} -->
-				<a th:href="@{/board/view(idx=${vo.idx},p=${cv.p},s=${cv.s},b=${cv.b})}">[[${vo.subject}]]</a>
+				<a th:href="@{/hboard/view(idx=${vo.idx},p=${cv.p},s=${cv.s},b=${cv.b})}">[[${vo.subject}]]</a>
 				</td>
 				<td>[[${vo.readCount}]]</td>
 				<td>[[${#dates.format(vo.regDate,'yy-MM-dd hh:mm')}]]</td>
@@ -84,8 +82,7 @@
                 <button id="searchBtn" type="submit" class="btn btn-sm btn-outline-success">검색</button>
         </div>
     </td>    
-</tr>
-
+</tr>		
 		<tr>
 			<td  class="sub_title" colspan="6">
 			<!-- 자바스크립트로 이동하기 -->
@@ -93,7 +90,6 @@
 			th:onclick="|location.href='@{insert(p=${cv.p},s=${cv.s},b=${cv.b})}'|">새글쓰기</button>
 			</td>
 		</tr>
-	
 	</table> 
 	</section>
 	<footer th:replace="~{comm/myLayout :: #myFooter}"></footer>
@@ -108,12 +104,11 @@
       console.log(searchType);
       console.log(keyword);
 
-      location.href = "/board/listSearch?p=1&s=10&b=10" + "&searchType=" + searchType + "&keyword=" + keyword;
+      location.href = "/hboard/listSearch?p=1&s=10&b=10" + "&searchType=" + searchType + "&keyword=" + keyword;
       
       
     });
   });
 </script>
-
 </body>
 </html>

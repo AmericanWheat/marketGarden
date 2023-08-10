@@ -12,7 +12,7 @@ public class CommVO {
 	private int p=1, s=10, b=10, idx=-1;
 	private int currentPage, sizeOfPage, sizeOfBlock;
 	private String mode="insert";
-	
+
 	public CommVO() {
 		this.currentPage = p;
 		this.sizeOfPage = s;
@@ -66,9 +66,5 @@ public class CommVO {
 		this.idx = idx;
 		this.mode = mode;
 	}
-
-
-
-
 	
 }

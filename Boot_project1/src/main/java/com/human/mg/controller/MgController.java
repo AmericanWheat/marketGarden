@@ -24,7 +24,7 @@ public class MgController {
 	private MgService mgService;
 
 	// 메인 컨트롤러
-	@GetMapping(value={"/","/main"})
+	@GetMapping(value = { "/", "/main" })
 	public String main(@RequestParam(name = "idx", required = false) String idx, Principal principal, Model model) {
 
 		if (principal != null) {
@@ -33,7 +33,7 @@ public class MgController {
 		}
 
 		model.addAttribute("idx", idx);
-		
+
 		return "main";
 	}
 
@@ -115,18 +115,51 @@ public class MgController {
 		}
 		return "login";
 	}
-	
+
 	// 회원보기
 	@GetMapping("/view")
 	public String view(@RequestParam(required = true, defaultValue = "0") int idx, Model model) {
 		model.addAttribute("vo", mgService.selectByIdx(idx)); // 글의 정보를 가지고 수정폼으로간다
 		return "view";
 	}
-	
-	//아이디 중복확인
+
+	// 아이디 중복확인
 	@GetMapping("/idCheck")
 	@ResponseBody
-	public int idCheck(@RequestParam(required = true, defaultValue = "") String userid) { 
+	public int idCheck(@RequestParam(required = true, defaultValue = "") String userid) {
 		return mgService.selectByIdxCount(userid);
 	}
+
+	// footer 링크--------------------------------------------------------
+	//
+	@GetMapping("/intro")
+	public String introduce() {
+		return "footerlink/introduce";
+	}
+
+	@GetMapping("/intro2")
+	public String hire() {
+		return "footerlink/introduce2";
+	}
+	
+	@GetMapping("/intro3")
+	public String intro3() {
+		return "footerlink/introduce3";
+	}
+	
+	@GetMapping("/intro4")
+	public String intro4() {
+		return "footerlink/introduce4";
+	}
+	
+	@GetMapping("/intro5")
+	public String intro6() {
+		return "footerlink/introduce5";
+	}
+	
+	@GetMapping("/intro6")
+	public String intro5() {
+		return "footerlink/introduce6";
+	}
+
 }

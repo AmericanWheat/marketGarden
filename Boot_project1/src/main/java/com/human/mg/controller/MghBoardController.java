@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.human.mg.service.MghBoardService;
 import com.human.mg.vo.CommVO;
@@ -35,6 +36,24 @@ public class MghBoardController {
 		return "hboard/hboardlist";
 	}
 	
+	@GetMapping("/listSearch")
+	public String boardlistSearch(@ModelAttribute CommVO commVO, Model model,
+			@RequestParam(value = "searchType", required = false, defaultValue = "subject") String searchType,
+			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
+
+		log.info("넘어온값 : {}", commVO);
+		model.addAttribute("cv", commVO);
+		PagingVO<MghBoardVO> pagingVO = boardService.selectListSearch(commVO.getCurrentPage(), commVO.getSizeOfPage(),
+				commVO.getSizeOfBlock(), searchType, keyword);
+		model.addAttribute("pv", pagingVO);
+		log.info("가져온값 : {}", pagingVO);
+		
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword", keyword);
+		
+		return "hboard/hboardlistSearch";
+	}
+
 	//글쓰기 
 	@GetMapping("/insert")
 	public String insert(@ModelAttribute CommVO commVO, Model model) {

@@ -68,6 +68,14 @@ function formCheck(){
 		 return false;
 	}
 	
+	value = $("#addr1").val();
+	if(value==null || value.trim().length==0){
+		alert('주소는 반드시 입력해야 합니다.');
+		 $("#addr1").val("");
+		 $("#addr1").focus();
+		 return false;
+	}
+	
 }
 </script>
 </head>

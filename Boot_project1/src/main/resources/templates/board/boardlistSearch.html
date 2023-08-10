@@ -28,6 +28,7 @@
 
 </head>
 <body>
+
 	<header th:replace="~{comm/myLayout :: #myHeader}" class="1"></header>
 	<nav th:replace="~{comm/myLayout :: #myNav}"></nav>
 	<section>
@@ -63,7 +64,7 @@
 				<td>[[${vo.ip}]]</td>
 			</tr>
 			<tr>
-				<td colspan="6" style="border: none;"> [(${pv.pageList})] </td>
+				<td colspan="6" style="border: none;"></td>
 			</tr>
 		</th:block>
 
@@ -74,14 +75,14 @@
     <td style="border: none;" colspan="6">
         <div class="search" style="text-align: center;">
             
-        <select name="searchType">
+           <select name="searchType">
     		<option value="subject" th:selected="${searchType eq 'subject'}">제목</option>
     		<option value="content" th:selected="${searchType eq 'content'}">내용</option>
    			<option value="subject_content" th:selected="${searchType eq 'subject_content'}">제목+내용</option>
    			<option value="name" th:selected="${searchType eq 'name'}">작성자</option>
 		</select>
-                <input type="text" name="keyword" th:value="${keyword}" />
-                <button id="searchBtn" type="submit" class="btn btn-sm btn-outline-success">검색</button>
+                <input type="text" name="keyword" th:value="${keyword}">
+                <button id="searchBtn" type="submit" class="btn btn-sm btn-outline-success">검색</button> <!-- type 변경 -->
         </div>
     </td>    
 </tr>
@@ -104,11 +105,11 @@
     searchBtn.addEventListener("click", function() {
       let searchType = document.getElementsByName("searchType")[0].value;
       let keyword =  document.getElementsByName("keyword")[0].value;
-      
+    
       console.log(searchType);
       console.log(keyword);
 
-      location.href = "/board/listSearch?p=1&s=10&b=10" + "&searchType=" + searchType + "&keyword=" + keyword;
+      location.href = "/board/listSearch?p=1&s=10&b=10"+ "&searchType=" + searchType + "&keyword=" + keyword;
       
       
     });

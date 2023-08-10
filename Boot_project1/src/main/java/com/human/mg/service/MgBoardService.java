@@ -1,5 +1,7 @@
 package com.human.mg.service;
 
+import java.sql.SQLException;
+
 import com.human.mg.vo.MgBoardVO;
 import com.human.mg.vo.PagingVO;
 
@@ -20,4 +22,10 @@ public interface MgBoardService {
 //	내용보기
 	MgBoardVO selectByIdx(int idx, boolean isReadCount);
 
+//	글 목록보기(검색추가)
+	PagingVO<MgBoardVO> selectListSearch(int currentPage, int sizeOfPage, int sizeOfBlock ,String searchType ,String keyword);
+	
+//	글 개수보기(검색추가)
+	int searchCount(String searchType, String keyword) throws SQLException;
+	
 }

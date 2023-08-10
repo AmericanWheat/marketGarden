@@ -48,4 +48,46 @@
 		update mgaboard set readcount = readcount + 1 where idx = #{idx}
 	</update>
 	
+		<!-- 글 목록보기 + 검색 -->
+	<select id="selectListSearch" parameterType="hashmap"
+		resultType="MgaBoardVO">
+		
+		select * from mgaboard
+		<if test='searchType.equals("subject")'>
+			WHERE subject LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test='searchType.equals("content")'>
+			WHERE content LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test='searchType.equals("subject_content")'>
+			WHERE subject LIKE '%' || #{keyword} || '%' OR content LIKE '%' ||
+			#{keyword} || '%'
+		</if>
+		<if test='searchType.equals("name")'>
+			WHERE name LIKE '%' || #{keyword} || '%'
+		</if>
+		order by idx desc
+	
+	</select>
+
+	<!-- 글 개수 보기 + 검색 기능 -->
+	<!-- searchtype과 keyword를 받아야하므로 parameter type을 추가 해줌  -->
+	<select id="searchCount" resultType="int" parameterType="hashmap">
+		select count(*) from mgaboard
+		<if test='searchType.equals("subject")'>
+			WHERE subject LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test='searchType.equals("content")'>
+			WHERE content LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test='searchType.equals("subject_content")'>
+			WHERE subject LIKE '%' || #{keyword} || '%' OR content LIKE '%' ||
+			#{keyword} || '%'
+		</if>
+		<if test='searchType.equals("name")'>
+			WHERE name LIKE '%' || #{keyword} || '%'
+		</if>
+	</select>
+	
+	
 </mapper>  

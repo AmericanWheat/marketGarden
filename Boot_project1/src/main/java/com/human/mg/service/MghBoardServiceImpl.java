@@ -1,5 +1,6 @@
 package com.human.mg.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,5 +116,39 @@ public class MghBoardServiceImpl implements MghBoardService {
 		return mghBoardVO;
 	}
 
+	@Override
+	public PagingVO<MghBoardVO> selectListSearch(int currentPage, int sizeOfPage, int sizeOfBlock, String searchType,
+			String keyword) {
+		PagingVO<MghBoardVO> pv = null;
 
+		try {
+
+			// 전체 개수 구하고
+			int totalCount = dao.searchCount(searchType, keyword);
+
+			// 페이지 계산하고
+			pv = new PagingVO<>(totalCount, currentPage, sizeOfPage, sizeOfBlock);
+
+			// 개수가 있다면 글목록을 가져와 넣어준다 + 검색종류와 키워드를 넣어줌
+			if (pv.getTotalCount() > 0) {
+				HashMap<String, Integer> map = new HashMap<>();
+				map.put("startNo", pv.getStartNo());
+				map.put("endNo", pv.getEndNo());
+				pv.setList(dao.selectListSearch(map, searchType, keyword));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return pv;
+	}
+
+	@Override
+	public int searchCount(String searchType, String keyword) throws SQLException {
+		return dao.searchCount(searchType, keyword);
+	}
+	
+	
+	
 }

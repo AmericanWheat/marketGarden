@@ -8,14 +8,15 @@
 </head>
 <body>
 	<!-- header  -->
-	<header id="myHeader">
-	<script type="text/javascript">
+<header id="myHeader">
+<script type="text/javascript">
 function updateForm(idx) {
 	if (confirm(idx + ' 계정을 수정하시겠습니까?')) {
 		let password = prompt('수정할 계정의 비번을 입력하세요');
 		location.href = '/update?idx=' + idx + "&password=" + password;
 	}
 }
+
 </script>
 		<table style=" width: 1000px; padding: 5px; border: none; margin: auto; margin-top: 10px;">
 		<tr>
@@ -30,9 +31,6 @@ function updateForm(idx) {
 		<button type="button" onclick="location.href='/login'"
 			style="position: inherit; right: 20px;" class="btn btn-sm btn-outline-success" >로그인</button>
 		<button type="button" onclick="location.href='/join'" class="btn btn-sm btn-outline-success">회원가입</button>
-		<button id="live-chat"
-			style="position: fixed; bottom: 20px; right: 20px; border: none; border-radius: 16px; background: royalblue; color: white; padding: 12px; font-weight: bold; box-shadow: 0px 5px 15px gray; cursor: pointer;">실시간
-			채팅 💬</button>
 		</th:block>
 		<th:block th:if="${session.MgVO != NULL}">
 			<div th:text="${session.MgVO.name}+님"/><br />
@@ -67,12 +65,12 @@ function updateForm(idx) {
 	<footer id="myFooter">
 			<table style=" width: 1000px; padding: 5px; border: none; margin: auto; margin-top: 10px;">
 			<tr>
-				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="#" style="color: white; text-decoration: none;">회사소개</a></th>
-				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="#" style="color: white; text-decoration: none;">인재채용</a></th>
-				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="#" style="color: white; text-decoration: none;">제휴제안</a></th>
-				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="#" style="color: white; text-decoration: none;">이용약관</a></th>
-				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="#" style="color: white; text-decoration: none;">개인정보처리방침</a></th>
-				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="#" style="color: white; text-decoration: none;">고객센터</a></th>
+				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="/intro" style="color: white; text-decoration: none;">회사소개</a></th>
+				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="/intro3" style="color: white; text-decoration: none;">제휴제안</a></th>
+				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="/intro4" style="color: white; text-decoration: none;">이용약관</a></th>
+				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="/intro5" style="color: white; text-decoration: none;">개인정보처리방침</a></th>
+				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="/intro2" style="color: white; text-decoration: none;">인재채용</a></th>
+				<th style="padding:5px; background-color: #198754; border: none; text-align: center;"><a href="/intro6" style="color: white; text-decoration: none;">고객센터</a></th>
 			</tr>
 			<tr>
 				<td colspan="6" style="padding:5px; border: 1px solid gray; text-align: center;">Copyright <a href="/list" style="text-decoration: none; color: black;">©</a> www.marketgarden.gg All

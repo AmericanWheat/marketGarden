@@ -25,4 +25,11 @@ public interface MguBoardService {
 
 //	거래추천 증가
 	void incrementExchange(int idx);
+		
+//	글 목록보기(검색추가)
+	PagingVO<MguBoardVO> selectListSearch(int currentPage, int sizeOfPage, int sizeOfBlock ,String searchType ,String keyword);
+	
+//	글 개수보기(검색추가)
+	int searchCount(String searchType, String keyword) throws SQLException;
+
 }

@@ -32,4 +32,10 @@ public interface MghBoardDAO {
 //	조회수 증가
 	void incrementReadCount(int idx) throws SQLException;
 	
+//	글 목록보기(검색추가)
+	List<MghBoardVO> selectListSearch(HashMap<String, Integer> map, String searchType, String keyword ) throws SQLException;
+		
+//	글 개수보기(검색추가)
+	int searchCount(String searchType, String keyword) throws SQLException;
+	
 }

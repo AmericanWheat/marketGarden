@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<script type="text/javascript">
+	function updateForm(idx) {
+		if (confirm(idx + ' 계정을 수정하시겠습니까?')) {
+			let password = prompt('수정할 계정의 비번을 입력하세요');
+			location.href = 'update?idx=' + idx + "&password=" + password;
+		}
+	}
+</script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+	<header th:replace="~{comm/myLayout :: #myHeader}"></header>
+	<nav th:replace="~{comm/myLayout :: #myNav}"></nav>
+
+	<section>
+
+			<table class="body_content_1"
+				style="text-align: left; font-size: 20px; background-image: url('/img/2.jpg'); opacity: 0.8; background-size: cover; color: white; font-weight: bold; padding: 25px;" >
+				<tr><td>&nbsp</td></tr>
+				<tr><td>&nbsp</td></tr>
+				<tr><td>&nbsp</td></tr>
+				<tr><td>&nbsp</td></tr>
+				<tr><td>&nbsp</td></tr>
+				<tr><td>&nbsp</td></tr>
+				<tr>
+					<td>창립일&nbsp&nbsp&nbsp : 2777.07.17</td>
+				</tr>
+				<tr>
+					<td>대표전화 : 02-7777-7777</td>
+				</tr>
+				<tr>
+					<td>대표메일 : admin1@marketgarden.mg</td>
+				</tr>
+					<tr>
+					<td>대표자&nbsp&nbsp&nbsp : 이민재</td>
+				</tr>
+				<tr><td>&nbsp</td></tr>
+				<tr><td></td>&nbsp</tr>
+				<tr><td></td>&nbsp</tr>
+				<tr><td></td>&nbsp</tr>
+				<tr>
+					<td>
+							<p>
+								안녕하세요! 마켓가든입니다.<br> 마켓가든은 2777년 설립 이래 친환경 사업에 주력해왔으며 <br />
+								지구환경 개선에 중점을 둔 중고 거래 사이트입니다 <br /> 우리 동네 이웃과 함께하며 중고 직거래와 더불어
+								이웃과 이웃, <br /> 흩어져 있던 정보를 연결하며 <br /> 지역 기반 커뮤니티 서비스를 만들어 나가고
+								있습니다.
+							</p></td>
+				</tr>
+			</table>
+		
+	</section>
+
+	<footer th:replace="~{comm/myLayout :: #myFooter}"></footer>
+
+
+
+</body>
+</html>
